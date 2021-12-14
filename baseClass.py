@@ -1,3 +1,6 @@
+from typing import Type
+
+
 class KeyboardBase:
 
     def __init__(self,keyboard:list) -> None:
@@ -14,6 +17,8 @@ class KeyboardBase:
         return val in self.val_to_index
 
     def translate(self,text:str,to_keyboard)->str:
+        if not isinstance(to_keyboard,KeyboardBase):
+            raise TypeError()
         newstring=""
         for s in text:
             if self.val_exists(s):
@@ -38,6 +43,6 @@ class EnglishKeyboard(KeyboardBase):
         keyboard=["q","w","e","r","t","y","u","i","o","p","[","]","a","s","d","f","g","h","j","k","l",";","'","z","x","c","v","b","n","m",",",".","/",]
         super().__init__(keyboard)
 
-# hebrew=HebrewKeyboard()
-# english=EnglishKeyboard()
-# print(hebrew.translate("דאןךך 'םרלד?",english))
+hebrew=HebrewKeyboard()
+english=EnglishKeyboard()
+print(hebrew.translate("דאןךך 'םרלד?",english))
